@@ -28,6 +28,10 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/django-docker-ci
+          tags: |
+            type=raw,value=latest
+            type=sha
+            type=ref,event=branch
 
       - name: Build & Push Docker Image
         uses: docker/build-push-action@v5

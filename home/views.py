@@ -6,8 +6,12 @@ def get_users():
     users = cache.get("users")
 
     if users is None:
-        users = list(User.objects.all())
-        cache.set("users", users, 60) # cache for 60 seconds
+        try:
+            users = list(User.objects.all())
+            cache.set("users", users, 60) # cache for 60 seconds
+
+        except Exception as e:
+            users = []
 
     return users
 
